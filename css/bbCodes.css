@@ -1,0 +1,15 @@
+.bb-bold    {
+    font-weight: bold
+}
+
+.bb-italic  {
+    font-style: italic
+}
+
+.bb-under   {
+    text-decoration: underline
+}
+
+.bb-strike  {
+    text-decoration: line-through
+}

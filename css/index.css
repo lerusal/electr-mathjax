@@ -1,0 +1,180 @@
+#frame {
+    max-width: 40em;
+    margin: auto;
+  }
+
+  #input {
+    border: 1px solid grey;
+    /*margin: 0 0 .25em;*/
+    width: 100%;
+    font-size: 100%;
+    box-sizing: border-box;
+    resize: none;
+    height:100%;
+    overflow: auto;
+  }
+
+  .overflow-y-hidden {
+    overflow-y: hidden;
+  } 
+
+  .height100 {
+    height: 100%;
+  }
+
+  .padding0 {
+    padding: 0px;
+  }
+
+  #output {
+    font-size: 100%;
+   /* margin-top: .75em; */
+    border: 1px solid grey;
+    /*adding: .25em;*/
+    min-height: 2em;
+    height:100%;
+    overflow: auto;
+  }
+  /*=========================================*/
+  * {
+    box-sizing: border-box;
+  }
+  
+ code {
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-weight: bold;
+  color: crimson;
+  background-color: #f1f1f1;
+  margin-top:  50px;
+  margin-bottom: 50px;
+  margin-left: 10px;
+ }
+
+  body {
+    margin: 0;
+  }
+  
+   h2 {
+     font-style: italic;
+     text-decoration: underline;
+   }
+  
+   p {
+    text-indent: 10px;
+   } 
+
+  #helpText {
+    padding-left: 10px;
+    padding-right: 10px;
+  }  
+
+  /* Style the header */
+  .header {
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Style the top navigation bar */
+  .topnav {
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  /* Style the topnav links */
+  .topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  /* Change color on hover */
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  /* Create three unequal columns that floats next to each other */
+  .column {
+    float: left;
+    padding: 10px;
+  }
+  
+  /* Left and right column */
+  .column.side {
+    width: 25%;
+  }
+  
+  /* Middle column */
+  .column.middle {
+    width: 50%;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Style the footer */
+  .footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .splitter {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      /* z-index: 100; */
+  }
+  
+  #first {
+      background-color: #dde;
+      width: 20%;
+      height: 100%;
+      min-width: 10px;
+  }
+  
+  #second {
+      background-color: #eee;
+      width: 80%;
+      height: 100%;
+      min-width: 10px;
+  }
+  
+  #separator {
+      cursor: col-resize;
+      background-color: #aaa;
+      width: 10px;
+      height: 100%;
+  
+      /* Prevent the browser's built-in drag from interfering */
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      z-index: 100;
+  }
+
+  /*=========================================*/
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+    #output, #output * {
+      visibility: visible;
+    }
+    #output {
+      position: absolute;
+      left: 0;
+      top: 0;
+      border: none;
+      overflow: visible;
+    }
+  }
+  

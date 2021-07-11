@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self';
+                                                        style-src  'self' 'unsafe-inline' https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css ;
+                                                        img-src    'self'  data:  ;
+                                                        script-src 'self'  https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js https://code.jquery.com/jquery-3.6.0.slim.min.js; 
+                                                       "
+    >
+
+    <!-- Bootstrap CSS -->
+    <!--
+    <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    -->
+    <!-- CSS only -->
+    <!-- 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    -->
+    <link rel="stylesheet" href="./css/index.css"    rel="stylesheet">
+    <link rel="stylesheet" href="./css/bbCodes.css"  rel="stylesheet">
+
+    <script src="./initMathJax.js"></script>
+    <script src="./dragElement.js"></script>
+
+<!--
+    <script id="MathJax-script" async src="./node_modules/mathjax/es5/tex-svg.js"></script>
+-->    
+    <script                           src="./node_modules/jquery/dist/jquery.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <script                           src="./initHelp.js"></script>
+    <title>LaTeX Editor Help</title>
+</head>
+<body>
+  <div class="splitter">
+    <div id="first" style="overflow-y: auto;" > 
+    </div>
+    <div id="separator" style="width: 10px; height:100%;"></div> 
+    <div id="second" style="overflow-y: auto;">
+    <div id="helpText" class="block-body block-row">
+    <h2> Learn how to type mathematical equations using LaTeX </h2>
+    <p> LaTeX is the standard language used by mathematicians, physicists, etc. for
+    typesetting mathematical expressions.
+    This application uses <a href="https://www.mathjax.org">MathJax</a>,
+    a Javascript-based engine, to process LaTeX code and render it in the way you would see it in a textbook. </p>
+    <h2> Delimiting your LaTeX code </h2>
+    <p> You must put special delimiters at the beginning and end of your LaTeX code,
+    in order for MathJax to recognize it and process it. If you want the equation
+    to appear inline with the surrounding text, put <code>\(</code> before and <code>\)</code> after
+    it. If you want the equation to stand alone in a separate "paragraph", centered
+    horizontally on the screen as in most textbooks, put <code>$$</code> before and
+    after it. </p>
+    <p> <b>Here's an example, first with the delimiters disabled so you can see the raw code: </b></p>
+    <div style="background-color:cornsilk">
+    A quadratic equation is of the form <code style="background-color: cornsilk">\(ax^2 + bx + c = 0\)</code>. To
+    solve for x, use the quadratic formula <code style="background-color: cornsilk">$$x = \frac {-b \pm \sqrt{b^2 -4ac}}
+    {2a},$$</code> <br> the values of the coefficients a, b and c. 
+    </div>
+    <br>
+    <p>
+      <b>And now with the delimiters enabled so as to render the equations: </b>
+    </p>
+    <div style="background-color: cornsilk">
+      A quadratic equation is of the form \(ax^2 + bx + c = 0\). To
+      solve for x, use the quadratic formula $$x = \frac {-b \pm \sqrt{b^2 -4ac}} {2a},$$ 
+      substituting the values of the coefficients a, b and c. 
+    </div>
+    <br>
+      <p style="font-weight: bold;"> Hereafter, I will omit the delimiters in code examples, to save space. </p>
+    <h2> Spaces </h2>
+    <p> Most blank spaces and end-of-line characters in your raw code are ignored.
+    Spaces will usually be placed in the rendered equation according to standard
+    mathematical conventions. For example, <code>a b + c / d</code> produces \(a b + c / d\)  
+    I'll try to note exceptions when they arise. </p>
+    <p> If you need to insert a visible space, the simplest way is usually to use a
+    <code>~</code> (tilde). You can also use <code>\text{ }</code>. There are examples
+    of both in the <b>Plain text</b> section below. </p>
+    <h2> Superscripts and subscripts </h2>
+    <p> The symbols <code>^</code> and <code>_</code> are the commands for
+    superscripts (e.g. exponents) and subscripts, respectively. If a superscript
+    or subscript has more than one character, enclose them in braces
+    <code>{ }</code>. This is a general rule for LaTeX commands, by the way:
+    if they are to act on multiple characters, enclose those characters in
+    braces. </p>
+    <p> You can have both subscripts and superscripts on the same symbol. Normally
+    they appear one on top of the other. If you want them offset as in tensor
+    notation, attach some of them to a pair of empty braces, as in the example for
+    R below. </p>
+    <p> If a subscript or superscript is a label that should be displayed in upright
+    Roman text, not italic, enclose it in <code>\rm{ }</code>. </p>
+    <table>
+      <tr>
+       <td>\(x^2, y_k, e^{ikx}\)</td><td> <code> x^2, y_k, e^{ikx} </code></td>
+      </tr>
+      <tr>
+        <td>\(x^2_k, R^{ab}{}_{cd}\)</td><td><code> x^2_k, R^{ab}{}_{cd} </code> </td>
+      </tr>
+      <tr>
+        <td>\(x_{old}, x_\rm{old}\)</td><td><code>x_{old}, x_\rm{old} </code></td>  
+      </tr>
+    </table>
+    
+    <h2> Roots and fractions </h2>
+    <p> You can combine operations by using braces to nest them,
+    one inside another. See the last example below. </p>
+    <table>
+      <tr>
+       <td>\( \sqrt x, \sqrt[3] x, \sqrt {b^2 - 4ac}\)</td><td><code> \sqrt x, \sqrt[3] x, \sqrt {b^2 - 4ac} </code></td>  
+      </tr>
+      <tr>
+        <td>\(\frac a b, \frac {ab} {c + d}\)</td><td><code> \frac a b, \frac {ab} {c + d} </code></td>  
+      </tr>
+      <tr>
+        <td>\(\frac 1 {\sqrt {1 - \frac {v^2} {c^2}}}\)</td><td><code> \frac 1 {\sqrt {1 - \frac {v^2} {c^2}}} </code> </td>  
+      </tr>
+    </table>
+    
+    <h2> Plain text </h2>
+    <p> By default, most "math text" is in italics. To get plain Roman text,
+    you can use <code>\text{ }</code> or <code>\rm{ }</code>, depending on
+    whether you want spaces or math operations to be rendered or not. </p>
+     \(\text{some text \frac 1 2}\) <code> \text{some text \frac 1 2} </code> <br>
+     \(\rm{some text \frac 1 2}\) <code> \rm{some text \frac 1 2} </code> <br>
+     \( g = 9.81~\rm{m/s^2}\)   <code> g = 9.81~\rm{m/s^2} </code> <br>
+    <p> The last example above uses a <code>~</code> (tilde) to put a blank space
+    between the number and the units. <code>\text{ }</code> doesn't work here
+    because the exponent wouldn't display properly. </p>
+    <h2> Parentheses, brackets, etc. </h2>
+    <p> For single-line expressions you can use parentheses and brackets
+    normally. However, braces are used by LaTeX itself for grouping
+    things, as you've seen above, so if you want them to actually appear, you
+    have to <b>escape</b> them by using backslashes. In this case the
+    braces lose their normal grouping function, so you have to use a second,
+    unescaped pair if you want them to be grouped. </p>
+    <p> For angle brackets, <code>\langle \rangle</code> looks better than
+    <code>&lt; &gt;</code>. </p>
+      \(\{ a + b \}\)   <code> \{ a + b \} </code>  <br><br>
+       \(\frac 1 { \{ a + b \} }\)  <code> \frac 1 { \{ a + b \} } </code>  <br><br>
+      \(\langle x \rangle\)  <code> \langle x \rangle </code>  <br><br>
+    
+    <p> For "tall" expressions e.g. fractions, sums or integrals, you can make
+    parentheses etc. adjust their size automatically to fit their contents. </p>
+    \(\left( \frac a b \right) \) <code> \left( \frac a b \right) </code>  <br><br>
+    \(\left[ \frac a b \right]\)  <code> \left[ \frac a b \right] </code>  <br><br>
+    \(\left\{ \frac a b \right\}\)  <code> \left\{ \frac a b \right\} </code>  <br><br>
+    \(\left| \frac a b \right|\)  <code> \left| \frac a b \right| </code>  <br><br>
+    \(\left\| \frac a b \right\|\)   <code> \left\| \frac a b \right\| </code> <br><br> 
+    \(\left&lt; \frac a b \right&gt;\)   <code> \left&lt; \frac a b \right&gt; </code> <br><br>  
+    \(\left[ 1 - \left( \frac v c \right)^2 \right]^{-1/2}\)   <code> \left[ 1 - \left( \frac v c \right)^2 \right]^{-1/2} </code> <br><br>
+    
+    <p> You can omit half of a pair of these "stretchy" delimiters by
+    replacing it with <code>\left.</code> or <code>\right.</code> as
+    appropriate. See the <b>Integrals</b> section below for an example. </p>
+    <h2> Vectors (physics) </h2>
+    <p> Different people and textbooks use different notations for vectors. I hope
+    yours is included in the following list. Also included are some common vector
+    math operators. <br>Of course, you can use any of the vector notations with these
+    operators. I showed only one for brevity. </p>
+      Vector 
+     \(\mathbf A, \vec A, \tilde A\) 
+     <code> \mathbf A, \vec A, \tilde A </code>  <br>
+      Unit vector  \(\hat {\mathbf A}, \hat A\)    <code> \hat {\mathbf A}, \hat A </code>  <br>
+      Scalar (dot) product  \(\vec A \cdot \vec B\)  <code> \vec A \cdot \vec B </code>  <br>
+      Vector (cross) product  \(\vec A \times \vec B\)   <code> \vec A \times \vec B </code> <br> 
+      Magnitude  \(| \vec A | \)  <code> | \vec A | </code>  <br>
+    
+    <h2> Derivatives </h2>
+     \(y', y'', y^{(n)}, \dot x, \ddot x\)   <code> y', y'', y^{(n)}, \dot x, \ddot x </code>  <br><br>
+     \(\frac {df} {dx}, \frac {\partial f} {\partial x}\)   <code> \frac {df} {dx}, \frac {\partial f} {\partial x} </code> <br><br>
+    \(\frac {\partial^2 \psi} {\partial x^2}\)  <code> \frac {\partial^2 \psi} {\partial x^2} </code>  <br><br>
+     \(\nabla f, \nabla^2 \psi, \Box^2 \phi\)   <code> \nabla f, \nabla^2 \psi, \Box^2 \phi </code>  <br><br>
+    
+    <h2> Integrals </h2>
+    <p> 
+      With integrals, use <code>\,</code> to insert a bit of space (not as much
+    as a full space) before the  (or whatever the variable of integration
+    is) at the end. 
+    </p>
+    <p> 
+    In the second example, note how the vertical bar representing the evaluation
+    of limits is specified. It's half of a left/right pair of "stretchy"
+    absolute-value bars. The left half is hidden by specifying it as
+    <code>\left.</code> instead of <code>\left|</code>. 
+    </p>
+    \( \int x^2e^x \, dx\)   <code> \int x^2e^x \, dx </code>  <br><br>
+    \(\int_a^b x^2 \, dx = \left. \frac 1 3 x^3 \right|_a^b\)   <code> \int_a^b x^2 \, dx = \left. \frac 1 3 x^3 \right|_a^b </code> <br><br>
+    \(\oint \vec E \cdot d \vec A\)   <code> \oint \vec E \cdot d \vec A </code>  <br><br>
+    \(\int_{y=c}^d \int_{x=a}^b e^{x+y} \, dx \, dy\)   <code> \int_{y=c}^d \int_{x=a}^b e^{x+y} \, dx \, dy </code>  <br><br>
+    \(\iint, \iint_S, \iiint, \iiint_V \)  <code> \iint, \iint_S, \iiint, \iiint_V </code> <br><br>
+    
+    <h2> Sums, products and limits </h2>
+     \( \sum_{n=0}^\infty a_n x^n   \)                       <code> \sum_{n=0}^\infty a_n x^n                        </code>  <br><br>
+     \( \prod_{n=0}^\infty a_n      \)                       <code> \prod_{n=0}^\infty a_n                           </code>  <br><br>
+     \( \lim_{n \rightarrow +\infty} {\frac {\sin(x)} x} \)   <code> \lim_{n \rightarrow +\infty} {\frac {\sin(x)} x} </code> <br><br>
+    
+    <h2> Greek letters </h2>
+     <h3>Greek lowercase</h3>
+     \(\alpha \beta \gamma \delta \epsilon \zeta\)  <code>\alpha \beta \gamma \delta \epsilon \zeta</code>  <br><br>
+     \(\eta \theta \iota \kappa \lambda \mu\)   <code>\eta \theta \iota \kappa \lambda \mu</code>  <br><br>
+     \(\nu \omicron \xi \pi \rho \sigma \tau\)   <code>\nu \omicron \xi \pi \rho \sigma \tau</code>  <br><br>
+     \(\upsilon \phi \chi \psi \omega\)          <code>\upsilon \phi \chi \psi \omega       </code>  
+     <h3>Greek lowercase (variant forms)</h3>
+    \(\varepsilon \vartheta \varpi \varrho \varsigma \varphi\)  <code>\varepsilon \vartheta \varpi \varrho \varsigma \varphi</code> 
+    <h3>Greek uppercase</h3> 
+    \(\Gamma \Delta \Theta \Lambda \Xi \Pi\) <code>\Gamma \Delta \Theta \Lambda \Xi \Pi</code>  <br><br>
+    \(\Sigma \Upsilon \Phi \Psi \Omega\)  <code>\Sigma \Upsilon \Phi \Psi \Omega</code>  <br><br>
+    
+    <h2> Other special symbols </h2>
+     Planck's constant \(\hbar\) <code>\hbar</code>  <br><br>
+     Infinity \(\infty\) <code>\infty</code>  <br><br>
+     Plus or minus \(\pm \mp\) <code>\pm \mp</code> <br><br> 
+     Parallel, perpendicular \(\parallel \perp\) <code>\parallel \perp</code>  <br><br>
+     For all \(\forall\)<code>\forall</code>  <br><br>
+     There exists \(\exists\)<code>\exists</code> <br><br> 
+      Ellipsis  \(\dots \cdots \vdots \ddots\)  <code> \dots \cdots \vdots \ddots </code>  <br><br>
+     <h2> Arrows </h2>
+     \(\rightarrow \leftarrow \leftrightarrow  \)  <code> \rightarrow \leftarrow \leftrightarrow </code>  <br>
+     \(\Rightarrow \Leftarrow \Leftrightarrow  \) <code> \Rightarrow \Leftarrow \Leftrightarrow </code>  <br>
+     \(\mapsto \to                             \) <code> \mapsto \to                            </code>  <br>
+     \(\uparrow \downarrow                     \) <code> \uparrow \downarrow                    </code>  <br>
+     <h2>Relations</h2> 
+      \(\gt \geq \lt \leq \neq\)      <code> \gt \geq \lt \leq \neq </code>  <br>
+      \(\gg \ll \equiv \)            <code> \gg \ll \equiv         </code>  <br>
+      \(\approx \cong \sim \)       <code> \approx \cong \sim     </code>  <br>
+      Absolute value, norm   \(|x|, \|x\| \) <code> |x|, \|x\| </code>  <br>
+      Complex conjugate, adjoint \( z^*, \bar z, z^\dagger \)  <code> z^*, \bar z, z^\dagger </code>  <br>
+      Dirac bracket notation \(\langle \phi | \psi \rangle\)   <code> \langle \phi | \psi \rangle </code> <br> 
+      Direct sum \(V \oplus W\) <code> V \oplus W \)</code>  <br>
+      Tensor product \( S \otimes T \) <code>S \otimes T </code> <br>  
+      Function composition \( f \circ g  \) <code>f \circ g </code>  <br>
+      Element of, not in \( x \in A, x \not\in A \) <code> x \in A, x \not\in A </code>  <br>
+      Subset \( A \subset B, B \subseteq C \) <code> A \subset B, B \subseteq C </code>  <br>
+      Set union, intersection \( A \cup B, A \cap B \) <code> A \cup B, A \cap B </code>  <br>
+      Multiple set union, intersection \( \bigcup_i A_i, \bigcap_i A_i \) <code> \bigcup_i A_i, \bigcap_i A_i </code>  <br>
+      Set subtraction \( A \setminus B \) <code> A \setminus B </code>  <br>
+      Binomial coefficient \( \binom n k, {_nC_r} \) <code> \binom n k, {_nC_r} </code>  <br>
+    
+    <h2> Special functions </h2>
+
+      Trigonometric \(\sin \cos \tan \sec \csc \cot \)  <code> \sin \cos \tan \sec \csc \cot </code> <br> 
+      Inverse trig  \(\arcsin \arccos \arctan\)  <code> \arcsin \arccos \arctan </code>  <br>
+      \(\sin^{-1} \cos^{-1} \tan^{-1}\sec^{-1} \csc^{-1} \cot^{-1}\)  <code> \sin^{-1} \cos^{-1} \tan^{-1}\sec^{-1} \csc^{-1} \cot^{-1}</code>  <br>
+      Logarithmic \( \ln \log \log_2 \log_{10}\)   <code> \ln \log \log_2 \log_{10} </code>  <br>
+      Hyperbolic trig \(\sinh \cosh \tanh \coth \) <code> \sinh \cosh \tanh \coth</code>  <br>
+      Inverse hyperbolic trig \( \sinh^{-1} \cosh^{-1} \tanh^{-1} \coth^{-1}\) <code> \sinh^{-1} \cosh^{-1} \tanh^{-1} \coth^{-1} </code>  <br>
+    
+      Other functions <br>
+     \(\operatorname {arcsec}\)  <code> \operatorname {arcsec} </code>  <br>
+    
+    <p> Functions that are not supported directly, e.g. <code>arcsec arccsc arccot sech csch arcsinh arccosh arctanh
+    arcsech arccsch arccoth</code>, can be used via <code>\operatorname</code> as
+    shown in the last example above. </p>
+    <h2> Multiple lines </h2>
+    <p> To split an equation or expression into multiple lines, use <code>\\</code>.
+    </p>
+    <p> To align them in a specific way (e.g. at <code>=</code> signs), enclose them
+    between <code>\begin{align}</code> and <code>\end{align}</code>, and use
+    <code>&amp;</code> to specify the points at which they are to be aligned.
+    By default, this adds equation numbers at the right side of the page. To
+    suppess them, put <code>\nonumber</code> at the end of each line. </p>
+        
+      \( y = (a + b)^2 \\ = a^2 + 2ab + b^2 \)   <code> y = (a + b)^2 \\ = a^2 + 2ab + b^2 </code>  <br>
+      \(\begin{align} y & = (a + b)^2 \\ & = a^2 + 2ab + b^2\end{align}\) <code> \begin{align}y &amp; = (a + b)^2 \\&amp; = a^2 + 2ab + b^2\end{align}</code>  <br>
+      \(\begin{align} y & = (a + b)^2 \nonumber \\ & = a^2 + 2ab + b^2 \nonumber \end{align} \) <code> \begin{align}y &amp; = (a + b)^2 \nonumber \\&amp; = a^2 + 2ab + b^2 \nonumber\end{align}</code>  <br>
+        
+    <p> This sort of construction with <code>\begin{}</code> and <code>\end{}</code><br>
+    is called an <b>environment</b>. There are other environments for different kinds
+    of formatting. </p>
+    
+    <h2> Matrices and Tables </h2>
+     
+    \( \begin{pmatrix}1 &amp; 2 &amp; 3 &amp; 4 \\a &amp; b &amp; c &amp; d \\x &amp; y &amp; z &amp; w\end{pmatrix} \)
+    <code>\begin{pmatrix}1 &amp; 2 &amp; 3 &amp; 4 \\a &amp; b &amp; c &amp; d \\x &amp; y &amp; z &amp; w\end{pmatrix} </code>  <br><br>
+    
+    \(\begin{vmatrix}1 &amp; 2 &amp; 3 &amp; 4 \\a &amp; b &amp; c &amp; d \\x &amp; y &amp; z &amp; w\end{vmatrix}\)
+     <code>\begin{vmatrix}1 &amp; 2 &amp; 3 &amp; 4 \\a &amp; b &amp; c &amp; d \\x &amp; y &amp; z &amp; w\end{vmatrix} </code><br><br>
+    
+    \(\begin{bmatrix}1 &amp; 2 &amp; 3 &amp; 4 \\a &amp; b &amp; c &amp; d \\
+    x &amp; y &amp; z &amp; w\end{bmatrix}\) 
+     <code> \begin{bmatrix}1 &amp; 2 &amp; 3 &amp; 4 \\a &amp; b &amp; c &amp; d \\
+    x &amp; y &amp; z &amp; w\end{bmatrix} </code>  <br><br>
+    
+    \(\begin{matrix}1 &amp; 2 &amp; 3 &amp; 4 \\a &amp; b &amp; c &amp; d \\
+    x &amp; y &amp; z &amp; w\end{matrix} \)
+     <code> \begin{matrix}1 &amp; 2 &amp; 3 &amp; 4 \\a &amp; b &amp; c &amp; d \\
+    x &amp; y &amp; z &amp; w\end{matrix} </code>  <br><br>
+     
+    \(\begin{array}{|c|c|c|c|} 
+    \hline 1 &amp; 2 &amp; 3 &amp; 4 \\ 
+    \hline a &amp; b &amp; c &amp; d \\ 
+    \hline x &amp; y &amp; z &amp; w \\ 
+    \hline 
+    \end{array} \)
+     <code> \begin{array}{|c|c|c|c|} 
+    \hline 1 &amp; 2 &amp; 3 &amp; 4 \\ 
+    \hline a &amp; b &amp; c &amp; d \\ 
+    \hline x &amp; y &amp; z &amp; w \\ 
+    \hline 
+    \end{array} </code>  <br><br>
+    
+    <h2> Cases </h2>
+    <p> The <code>cases</code> environment lets you specify functions piecewise, with
+    a left brace grouping the cases together. </p>
+    
+    \(u(x) =
+    \begin{cases}
+    e^x &amp; \text{if } x \geq 0 \\
+    1 &amp; \text{if } x &lt; 0
+    \end{cases}  \)
+     <code> u(x) =
+    \begin{cases}
+    e^x &amp; \text{if } x \geq 0 \\
+    1 &amp; \text{if } x &lt; 0
+    \end{cases} </code>  <br><br>
+     \(V(x) = \begin{cases}
+    0, &amp; x \lt 0 \\
+    V_0, &amp; 0 \leq x \lt L \\
+    0, &amp; x \geq L
+    \end{cases}\)   
+     <code> V(x) = \begin{cases}
+    0, &amp; x \lt 0 \\
+    V_0, &amp; 0 \leq x \lt L \\
+    0, &amp; x \geq L
+    \end{cases} </code>  <br><br>
+    
+    <h2> Fonts </h2>
+    
+      Blackboard bold  \(\mathbb {ABCDE}\)    <code> \mathbb {ABCDE} </code>  <br><br>
+      Calligraphic \( \mathcal {ABCDE} \)  <code> \mathcal {ABCDE} </code>  <br><br>
+      Fraktur \( \mathfrak {ABCDE} \)  <code> \mathfrak {ABCDE} </code>  <br><br>
+      Sans serif  \( \mathsf {ABCDE} \)  <code> \mathsf {ABCDE} </code>  <br><br>
+      Roman (upright) \( \mathrm {ABCDE} \)  <code> \mathrm {ABCDE} </code>  <br><br>
+      Bold  \( \mathbf {ABCDE} \)  <code> \mathbf {ABCDE} </code>  <br><br>
+      Typewriter \( \mathtt {ABCDE} \) <code> \mathtt {ABCDE} </code>  <br><br>
+
+      <h2>BB Codes</h2>
+      You can use following BB codes to format your text:<br>
+      BB codes [B], [I], [U], [S] - Bold, italics, underline, and strike-through.<br>
+      Makes the wrapped text bold, italic, underlined, or struck-through.<br> 
+      Example: 
+      <br>
+      <table>
+        <tr>
+          <td>
+           This is [B]bold[/B] text. 
+          </td>
+          <td>
+           This is <span class="bb-bold">bold</span> text. 
+          </td>
+        </tr>
+        <tr>
+          <td>
+              This is [I]italic[/I] text. 
+          </td>
+          <td>
+            This is <span class="bb-italic">italic</span> text. 
+        </td>
+      </tr>    
+      <tr>
+        <td>
+            This is [U]underline[/U] text. 
+        </td>
+        <td>
+          This is <span class="bb-under">underline</span> text. 
+      </td>
+    </tr>    
+    <tr>
+      <td>
+          This is [S]struck-through[/S] text. 
+      </td>
+      <td>
+        This is <span class="bb-strike">struck-through</span> text. 
+      </td>
+     </tr>    
+    </table>
+
+    <h2>FAQ</h2>
+    <b>How do I write a fraction?</b>
+    <code>\(\frac{num}{denom}\) (inline)</code> These render as: \(\frac{num}{denom}\) <br><br>
+
+    Examples: <code>\(\frac 1 3 \) and \(\frac{x + 2}{2x + 6}\)</code> These render as: \(\frac 1 3\) and \(\frac{x + 2}{2x + 6}\)<br><br>
+    Braces are necessary only if the numerator or denominator is longer than a single character.<br><br>
+    
+    <b>How do I write exponents and subscripts?</b>
+    <code>$$x^{-1}$$ and $$c_{10}(x + 1)^3$$</code><br><br>
+        These render as 
+    $$x^{-1}$$ and $$c_{10}(x + 1)^3$$
+    Braces are required for exponents and subscripts only if the exponent/subscript is longer than a single character.<br><br>
+    <b>How do I write an integral?</b>
+    <code>$$\int 2x + 3 ~dx$$ and $$\int_{t=0}^{10}t^2 + 1 ~dt$$</code><br><br>
+    These render as $$\int 2x + 3 ~dx$$ and<br> $$\int_{t=0}^{10}t^2 + 1 ~dt$$
+    
+    <br><b>How do I write a summation?</b>
+    <code>$$\sum_{k=0}^\infty a_k$$</code><br><br>
+    
+    This renders as $$\sum_{k=0}^\infty a_k$$
+    
+    Using $ delimiters, this renders as s $$\sum_{k=0}^\infty a_k$$<br><br>
+    <b>How do I write Greek letters?</b>
+    Here are a few lowercase Greek letters - <code>$$\alpha, \beta, \theta, \lambda, \sigma$$</code><br><br>
+    And a few uppercase Greek letters - <code>$$\Gamma, \Psi, \Phi, \Theta, \Lambda, \Sigma$$</code><br><br>
+    
+    These render as $$\alpha, \beta, \theta, \lambda, \sigma$$ 
+    $$\Gamma, \Psi, \Phi, \Theta, \Lambda, \Sigma$$
+  </div>  
+  <!-- block-body block-row -->
+  </div>
+  <!-- second -->
+  </div>
+  <!-- splitter -->
+</body>    
+</html>
+
+                          
