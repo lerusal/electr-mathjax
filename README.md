@@ -5,8 +5,6 @@
 *** Thanks again! Now go create something AMAZING! :D
 -->
 
-
-
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -18,13 +16,11 @@
 [![MIT License][license-shield]][license-url]
 
 <!-- PROJECT LOGO -->
-<br />
-<p align="center">
-  <img src="images/latexImage.gif" alt="screenshot" width="800" height="600">
+![screenshot](/images/latexImage.gif)
 
-  <h2 align="center">Sorry! This project is under construction! </h2>
-  <h3 align="center">Very Simple LaTex Editor </h3>
-</p>
+# Very Simple LaTex Editor
+
+## Sorry! This project is under construction
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
@@ -52,45 +48,62 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a very simple LaTex editor. 
-It is built using electron & MathJax.
+This is a very simple LaTex editor.
+It is built using ElectronJs & MathJax.
 You can create text with mathematical formulas using LaTex language.
 You don't need to install anything else except this editor
 
 ### Built With
-* [electron](electronjs.org)
+
+* [ElectronJS](electronjs.org)
 * [MathJax](https://www.mathjax.org)
 * [Bootstrap](https://getbootstrap.com)
 * [JQuery](https://jquery.com)
 
+## Prerequisites
+
+[git](https://git-scm.com/) and [npm](https://www.npmjs.com) need to be installed on your computer.
+
 <!-- GETTING STARTED -->
 ## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
 
 ### Installation
 
 1. Clone the repo
+
    ```sh
+
    git clone https://github.com/lerusal/electr-mathjax.git
+
    ```
-2. Install NPM packages
+
+2. Navigate to repository directory
+
+3. Install NPM packages
+
    ```sh
    npm install
    ```
 
+## Usage
+
+### Start editor
+
+1. Navigate to repository directory
+
+2. Execute command
+
+```sh
+npm start
+```
 
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a list of proposed features (and known issues).
-
+See the [open issues](https://github.com/lerusal/electr-mathjax/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -103,13 +116,10 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-
 <!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
-
 
 <!-- CONTACT -->
 ## Contact
@@ -118,11 +128,8 @@ Lev Erusalimskiy -  erusalimskiy@hotmail.com
 
 Project Link: [https://github.com/lerusal/electr-mathjax.git](https://github.com/lerusal/electr-mathjax.git )
 
-
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
-
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
