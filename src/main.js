@@ -55,7 +55,7 @@ function setIpcMainHandles()
 
       return res; 
   }
-  )
+  ) // ipcMain.handle('OpenFile', (event, arg) => 
 
   ipcMain.handle("toPdf", (event, arg) => 
   {
@@ -81,32 +81,36 @@ function setIpcMainHandles()
             )  
       }              
   }
-  );
+  ); // ipcMain.handle("toPdf", (event, arg) => 
 
   ipcMain.handle('SaveFileAs', (event, arg) => 
   {
     let data = arg;
+    let fileName = null;
+    if(data) 
+    {
+      fileName = dialog.showSaveDialogSync(
+                          win, 
+                          {
+                              properties: ['showOverwriteConfirmation']
+                          }
+                        )
 
-    let fileName = dialog.showSaveDialogSync
-                   (
-                    win, 
-                    {
-                        properties: ['showOverwriteConfirmation']
-                    }
-                   )
-        if(fileName)
-        {
-          try {
-            fs.renameSync(fileName, fileName + '.bak');
-          } catch (error) { // ignore error if file doesn't exist
-            
-          }           
-          fs.writeFileSync(fileName, data, 'utf8');                   
-          showNotification ('LaTex Editor', `Saved data to file: ${fileName}`);
+      if(fileName)
+      {
+        try {
+          fs.renameSync(fileName, fileName + '.bak');
+        } catch (error) { // ignore error if file doesn't exist
+
         }           
 
+        fs.writeFileSync(fileName, data, 'utf8');                   
+        showNotification ('LaTex Editor', `Saved data to file: ${fileName}`);
+      }           
+    } // if(data) 
+
     return fileName;     
-  });
+  }); //  ipcMain.handle('SaveFileAs', (event, arg) => 
 
   ipcMain.handle('SaveFile', (event, arg) => 
   {
@@ -116,12 +120,12 @@ function setIpcMainHandles()
           
         }     
 
-        fs.writeFileSync(arg.fileName, arg.data, 'utf8');                   
+        fs.writeFileSync(arg.fileName, arg.fileData, 'utf8');                   
         showNotification ('LaTex Editor', `Saved data to file: ${arg.fileName}`);
 
     return arg.fileName;     
   }
-  )
+  ) // ipcMain.handle('SaveFile', (event, arg) => 
 
   ipcMain.handle('about', (event, arg) =>
   {
@@ -138,7 +142,15 @@ function setIpcMainHandles()
         nodeIntegration:  false,
         contextIsolation: true,
         allowRunningInsecureContent: false,
-        modal: true
+        modal: true,
+        enableRemoteModule: false,
+        nativeWindowOpen: false,
+        nodeIntegrationInWorker: false,
+        nodeIntegrationInSubFrames: false,
+        safeDialogs: true,
+        sandbox: true,
+        webSecurity: true,
+        webviewTag: false,
       }
     })
 
@@ -172,7 +184,7 @@ function setIpcMainHandles()
 
       return aboutData;
     }
-  )
+  ) // ipcMain.handle('aboutData', (event) => 
 
   ipcMain.handle('openHelp', (event) => 
     {
@@ -201,7 +213,15 @@ function createWindow ()
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration:  false,
       contextIsolation: true,
-      allowRunningInsecureContent: false
+      allowRunningInsecureContent: false,
+      enableRemoteModule: false,
+      nativeWindowOpen: false,
+      nodeIntegrationInWorker: false,
+      nodeIntegrationInSubFrames: false,
+      safeDialogs: true,
+    //  sandbox: true,
+      webSecurity: true,
+      webviewTag: false,
     }
   })
 
