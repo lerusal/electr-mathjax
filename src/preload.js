@@ -1,28 +1,10 @@
 const {ipcRenderer, contextBridge} = require('electron')
 
-function doSaveFileAs() {
-    let data = $('#input').val();     
-        ipcRenderer.invoke("SaveFileAs", data).then (
-          (fileName) => {
-           // console.log(`File saved ${fileName}`);
-            $('#fileNameId').text(fileName); 
-          }
-        );
-}
-
-// For unknown to me reason 
-// it is not possible to reload data 
-// in textarea. That's why we need first to
-// delete element from DOM, append it to DOM again and then load data
-function setDataTextArea(data) 
-{
-  $("#input" ).remove(); 
-  $('#inputAreaId').append('<textarea id="input"></textarea>')
-  $('#input').val(data); 
+function doSaveFileAs(fileData) {
+      return  ipcRenderer.invoke("SaveFileAs", fileData);
 }
 
 window.addEventListener('DOMContentLoaded', (e) => {
-    window.$ = window.jQuery = require("jquery"); 
     contextBridge.exposeInMainWorld
     (
       'mf', 
@@ -32,35 +14,24 @@ window.addEventListener('DOMContentLoaded', (e) => {
          setDataTextArea(data);
        },
        openFile: () => { 
-          // console.log('Open file');
-          ipcRenderer.invoke("OpenFile").then (
-             (result) => {
-               if (result) 
-               {
-                setDataTextArea(result.fileData);
-                $('#fileNameId').html(result.fileName); 
-               }
-             }
-          )
-        }, 
-        saveFile: () => {
-          let fileName = $('#fileNameId').text();
+         return ipcRenderer.invoke("OpenFile")
+       }, 
+       saveFile: (fileName, fileData) => {
           if (fileName) 
           {
-            let data = $('#input').val();     
-            let msg = {fileName, data};
+            let msg = {fileName, fileData};
                 ipcRenderer.invoke("SaveFile", msg).then (
                   (result) => {
                     // console.log(`Save file ${fileName}`);                
                   }
                 )
           } else {
-            doSaveFileAs();
+            doSaveFileAs(fileData);
           }
         },
-        saveFileAs: () => { 
-          doSaveFileAs();
-         },
+        saveFileAs: (fileData) => { 
+         return doSaveFileAs(fileData);
+        },
         toPdf: () => {
           ipcRenderer.invoke("toPdf").then (
             (fileName) => {

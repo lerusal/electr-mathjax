@@ -2,7 +2,6 @@ const {ipcRenderer, contextBridge} = require('electron')
 
 
 window.addEventListener('DOMContentLoaded', (e) => {
-    window.$ = window.jQuery = require("jquery"); 
     contextBridge.exposeInMainWorld
     (
       'mfAbout', 
@@ -10,12 +9,11 @@ window.addEventListener('DOMContentLoaded', (e) => {
         aboutData: () => {
           ipcRenderer.invoke("aboutData").then (
            (resp) => { 
-            // console.log('MathJax.version');
-            $('#laTexEditorId').text(resp.laTexEditor); 
-             $('#nodeId').text(resp.node);
-             $('#electronId').text(resp.electron);
-             $('#chromeId').text(resp.chrome);
-             $('#mathJaxId').text(resp.mathJaxVersion);
+            document.getElementById('laTexEditorId').textContent  = resp.laTexEditor; 
+            document.getElementById('nodeId').textContent   = resp.node;
+            document.getElementById('electronId').textContent   = resp.electron;
+            document.getElementById('chromeId').textContent    = resp.chrome;
+            document.getElementById('mathJaxId').textContent  = resp.mathJaxVersion;
            }
           ) 
         }

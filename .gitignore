@@ -1,3 +1,8 @@
 node_modules/
 
 
+.vscode/launch.json
+help-1.tex
+help-2.tex
+*.bak
+

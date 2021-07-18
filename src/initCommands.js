@@ -7,7 +7,7 @@ function initCommands()
           res.then (
             (result) => {
               if (result === 0) {
-                window.mf.setDataTA('');
+                setDataTextArea('');
                 $('#fileNameId').html(""); 
               }
             }
@@ -22,24 +22,52 @@ function initCommands()
      }
     )
 
+    // For unknown to me reason 
+    // it is not possible to reload data 
+    // in textarea. That's why we need first to
+    // delete element from DOM, append it to DOM again and then load data
+    function setDataTextArea(data) 
+    {
+      $("#input" ).remove(); 
+      $('#inputAreaId').append('<textarea id="input"></textarea>')
+      $('#input').val(data); 
+    }
+
     $("#openFileId").on("click",
     () => 
        {
-         window.mf.openFile();
+        window.mf.openFile().then
+        (
+          (fData) => 
+          {
+            if(fData) 
+            {
+              setDataTextArea(fData.fileData); 
+              $('#fileNameId').html(fData.fileName); 
+            }
+          } 
+        )
        }
     );
 
     $("#saveFileId").on("click",
     () =>
        {
-         window.mf.saveFile();
+        let fileName = $('#fileNameId').text();
+        let fileData = $('#input').val();     
+         window.mf.saveFile(fileName, fileData);
        }
     );
 
     $("#saveFileAsId").on("click",
     () => 
        {
-         window.mf.saveFileAs();
+        let fileData = $('#input').val();     
+         window.mf.saveFileAs(fileData).then(
+           (fileName) => {
+            $('#fileNameId').html(fileName); 
+           }
+         );
        }
     );
 
