@@ -5,6 +5,26 @@ const fs   = require('fs')
 let mathJaxVersion = null; // initial value
 let win = null; // initial value
 
+function webPrefProp (webPref) {
+
+  let wp = 
+   {
+    nodeIntegration:  false,
+    contextIsolation: true,
+    allowRunningInsecureContent: false,
+    enableRemoteModule: false,
+    nativeWindowOpen: false,
+    nodeIntegrationInWorker: false,
+    nodeIntegrationInSubFrames: false,
+    safeDialogs: true,
+    sandbox: true,
+    webSecurity: true,
+    webviewTag: false,
+   }
+
+   return Object.assign(webPref , wp);
+}
+
 function showNotification (title, body) {
   const notification = {
     title: title,
@@ -129,6 +149,13 @@ function setIpcMainHandles()
 
   ipcMain.handle('about', (event, arg) =>
   {
+
+    let webPref = {
+      preload: path.join(__dirname, 'preloadAbout.js'),
+      modal: true,
+    }
+    webPref = webPrefProp(webPref);
+
     const winAbout = new BrowserWindow({
       parent: BrowserWindow.getFocusedWindow(),
       width:  800,
@@ -137,21 +164,7 @@ function setIpcMainHandles()
       maximizable: false,
       minimizable: false,
       title : 'About',
-      webPreferences: {
-        preload: path.join(__dirname, 'preloadAbout.js'),
-        nodeIntegration:  false,
-        contextIsolation: true,
-        allowRunningInsecureContent: false,
-        modal: true,
-        enableRemoteModule: false,
-        nativeWindowOpen: false,
-        nodeIntegrationInWorker: false,
-        nodeIntegrationInSubFrames: false,
-        safeDialogs: true,
-        sandbox: true,
-        webSecurity: true,
-        webviewTag: false,
-      }
+      webPreferences: webPref
     })
 
     mathJaxVersion = arg;
@@ -188,15 +201,16 @@ function setIpcMainHandles()
 
   ipcMain.handle('openHelp', (event) => 
     {
+
+      let webPref = {
+        preload: path.join(__dirname, 'preloadHelp.js'),
+      }
+      webPref = webPrefProp(webPref);
+
       const winHelp = new BrowserWindow({ width: 1200, height: 800,
         autoHideMenuBar: true ,
         minimizable: false,
-        webPreferences: {
-          preload: path.join(__dirname, 'preloadHelp.js'),
-          nodeIntegration:  false,
-          contextIsolation: true,
-          allowRunningInsecureContent: false
-        }        
+        webPreferences: webPref
        });
       winHelp.loadFile('help.html');
     } 
@@ -205,24 +219,16 @@ function setIpcMainHandles()
 
 function createWindow () 
 {
+  let webPref = {
+    preload: path.join(__dirname, 'preload.js'),
+  }
+  webPref = webPrefProp(webPref);
+
   win = new BrowserWindow({
     width: 800,
     height: 600,
     autoHideMenuBar: true ,
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
-      nodeIntegration:  false,
-      contextIsolation: true,
-      allowRunningInsecureContent: false,
-      enableRemoteModule: false,
-      nativeWindowOpen: false,
-      nodeIntegrationInWorker: false,
-      nodeIntegrationInSubFrames: false,
-      safeDialogs: true,
-    //  sandbox: true,
-      webSecurity: true,
-      webviewTag: false,
-    }
+    webPreferences: webPref
   })
 
   win.maximize();
